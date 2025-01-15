@@ -1,4 +1,3 @@
-# app/api/routers/auth.py
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from app.api.dependencies.db import get_db

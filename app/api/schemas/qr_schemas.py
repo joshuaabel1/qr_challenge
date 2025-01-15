@@ -1,11 +1,18 @@
-# app/api/schemas/qr_schemas.py
 from pydantic import BaseModel, HttpUrl, UUID4
-
+from pydantic import BaseModel, validator
+from typing import Optional
 
 class QRCreateRequest(BaseModel):
     url: HttpUrl
-    color: str
+    color: Optional[str] = "black"
     size: int
+
+    @validator("color", pre=True)
+    def default_color_if_empty(cls, v):
+        if not v or v.strip() == "":
+            return "black"
+        return v
+
 
 class QRUpdateRequest(BaseModel):
     url: HttpUrl | None = None
@@ -19,5 +26,4 @@ class QRResponse(BaseModel):
     size: int
 
     class Config:
-        # Permite a Pydantic leer directamente objetos de SQLAlchemy
         from_attributes = True

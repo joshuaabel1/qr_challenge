@@ -1,4 +1,3 @@
-# app/services/scan_service.py
 from sqlalchemy.orm import Session
 from app.db.models import Scan, QRCode
 from fastapi import HTTPException, status
@@ -23,8 +22,6 @@ def register_scan(db: Session, qr_uuid: uuid.UUID, ip: str) -> Scan:
 
 def get_country_from_ip(ip: str) -> str | None:
     try:
-        # Ejemplo usando una API gratuita (ipapi.co o similar).
-        # Nota: En una app real, maneja rate-limits, errores, etc.
         response = requests.get(f"https://ipapi.co/{ip}/json/")
         if response.status_code == 200:
             data = response.json()

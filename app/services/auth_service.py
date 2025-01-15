@@ -1,10 +1,9 @@
-# app/services/auth_service.py
+from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 from app.db.models import User
 from app.core.security import verify_password, get_password_hash, create_access_token
 from app.core.config import settings
 from fastapi import HTTPException, status
-from jose import jwt, JWTError
 
 def register_user(db: Session, email: str, password: str) -> User:
     existing_user = db.query(User).filter(User.email == email).first()

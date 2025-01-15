@@ -1,4 +1,3 @@
-# app/api/dependencies/db.py
 from typing import Generator
 from app.db.session import SessionLocal
 from fastapi import Depends, HTTPException, status

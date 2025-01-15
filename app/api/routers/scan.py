@@ -22,10 +22,8 @@ def simulate_scan(
     """
     client_ip = request.client.host
 
-    # Registrar
     scan = register_scan(db, qr_uuid, client_ip)
 
-    # Obtener la URL
     qr_code = db.query(QRCode).filter(
         QRCode.uuid == qr_uuid
     ).first()

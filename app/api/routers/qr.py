@@ -1,4 +1,3 @@
-# app/api/routers/qr.py
 from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy.orm import Session
 from app.db.models import QRCode
@@ -92,10 +91,8 @@ def get_qr_image(
             detail="QR not found or not owned by user"
         )
 
-    # Generar la imagen en memoria
     img_bytes = generate_qr_image(db_qr.url, db_qr.color, db_qr.size)
-    
-    # Retornar como archivo PNG
+
     return Response(
         content=img_bytes,
         media_type="image/png",

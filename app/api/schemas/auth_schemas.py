@@ -1,4 +1,3 @@
-# app/api/schemas/auth_schemas.py
 from pydantic import BaseModel, EmailStr
 
 class UserRegisterRequest(BaseModel):
