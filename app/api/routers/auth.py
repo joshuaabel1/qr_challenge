@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from app.api.dependencies.db import get_db
 from app.api.schemas.auth_schemas import UserRegisterRequest, UserRegisterResponse, TokenResponse
 from app.services.auth_service import register_user, authenticate_user
-from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -17,5 +16,5 @@ def login(
     form_data: UserRegisterRequest = Depends(),
     db: Session = Depends(get_db)
 ):
-    token = authenticate_user(db, form_data.username, form_data.password)
+    token = authenticate_user(db, form_data.email, form_data.password)
     return TokenResponse(access_token=token)

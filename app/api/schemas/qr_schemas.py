@@ -5,12 +5,18 @@ from typing import Optional
 class QRCreateRequest(BaseModel):
     url: HttpUrl
     color: Optional[str] = "black"
-    size: int
+    size: Optional[int] = 8
 
     @validator("color", pre=True)
     def default_color_if_empty(cls, v):
         if not v or v.strip() == "":
             return "black"
+        return v
+       
+    @validator("size", pre=True)
+    def default_size_if_empty(cls, v):
+        if v is None:
+            return 8
         return v
 
 

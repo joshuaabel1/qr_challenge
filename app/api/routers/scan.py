@@ -20,7 +20,14 @@ def simulate_scan(
     Simula el escaneo de un QR.
     Registra IP/país/timestamp y redirige a la URL.
     """
-    client_ip = request.client.host
+    
+    x_forwarded_for = request.headers.get("x-forwarded-for")
+    if x_forwarded_for:
+        client_ip = x_forwarded_for.split(",")[0].strip()
+    else:
+        client_ip = request.client.host
+
+    print('client_ip', client_ip)
 
     scan = register_scan(db, qr_uuid, client_ip)
 
